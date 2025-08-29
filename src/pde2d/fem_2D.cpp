@@ -90,7 +90,7 @@ void assembleForIteration(
         }
     }
 
-    // === 单元循环：装配局部矩阵/向量到全局 ===
+    // 装配局部矩阵/向量到全局 
     auto elems = mesh.getElements();
 
     if (mesh.getElementType() == ::pde2d::mesh_2d::ElementType::RECTANGULAR) {
@@ -126,7 +126,7 @@ void assembleForIteration(
         }
     }
 
-    // === Dirichlet 处理 ===
+    // Dirichlet 
     // 对于 Dirichlet 自由度：矩阵只保留 (i,i)=1，残量为 (u(i)-边界值)
     if (impose_dirichlet) {
         for (int i=0; i<nnode; ++i) {

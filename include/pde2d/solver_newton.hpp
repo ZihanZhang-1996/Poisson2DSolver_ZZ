@@ -8,7 +8,6 @@
 #include "pde2d/Mesh2D.hpp"
 #include "pde2d/fem_2D.hpp"
 
-// 仅做前置声明，避免不必要地暴露第三方表达式库细节
 namespace pde2d { namespace problem { class ProblemExpr2D; } }
 
 namespace pde2d {

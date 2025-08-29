@@ -41,21 +41,21 @@ int main(int argc, char* argv[]) {
     using namespace pde2d::mesh_2d;
     using clock_t = std::chrono::steady_clock;
 
-    // --- 命令行输入检查 ---
+    // 命令行输入检查 
     if (argc < 2) {
         std::cerr << "用法: " << argv[0] << " <输入文件名.json>\n"
                   << "注意: 输入文件应放在 ./input/ 文件夹中\n";
         return 1;
     }
 
-    // --- 构造 input 文件完整路径 ---
+    //  构造 input 文件完整路径
     std::string filename = argv[1];  // 用户传入的文件名（例如 example_input.json）
     std::filesystem::path input_file = std::filesystem::path("input") / filename;
 
     // 程序开始计时
     const auto t_program_start = clock_t::now();
 
-    // --- 定义求解所需对象 ---
+    // 定义求解所需对象
     pde2d::mesh_2d::Mesh2D mesh;                // 网格
     pde2d::problem::ProblemExpr2D prob;         // PDE 问题定义（f, df/du, 边界条件等）
     pde2d::solver::Newton2DOptions opt;         // Newton 迭代选项（容差、最大迭代数等）
@@ -79,7 +79,7 @@ int main(int argc, char* argv[]) {
     std::cout << (ok ? "Converged\n" : "Not converged\n");
     std::cout << "[Timing] Newton solve time: " << newton_ms << " ms\n";
 
-    // --- 导出数值解到 CSV ---
+    // 导出数值解到 CSV 
     // 输出文件名格式: input文件名的stem + "_u_matrix.csv"
     std::string stem = std::filesystem::path(filename).stem().string();
     auto out_csv = exe_dir() / "output" / (stem + "_u_matrix.csv");
@@ -88,7 +88,7 @@ int main(int argc, char* argv[]) {
     std::filesystem::create_directories(out_csv.parent_path());
     pde2d::io::save_u_matrix_csv(mesh, u, out_csv.string());
 
-    // --- 全程序耗时统计 ---
+    // 耗时统计
     std::cout << "[Mesh] Mesh: " << mesh.getnx() <<"x"<< mesh.getny()<< "\n";
     const auto t_program_end = clock_t::now();
     const auto program_ms = std::chrono::duration_cast<ms>(t_program_end - t_program_start).count();
