@@ -1,0 +1,27 @@
+{
+    "problem": {
+      "f_expr": "0",
+      "dfdu_expr": "0"
+    },
+    "mesh": {
+      "type": "rectangular",
+      "nx": 16,
+      "ny": 16,
+      "Lx": 2.0,
+      "Ly": 3.0
+    },
+    "boundary": {
+      "type": "dirichlet",
+      "left":   "0",  
+      "right":  "0", 
+      "bottom": "0",        
+      "top":    "1"       
+    },
+    "newton": {
+      "max_iter": 50,
+      "tol_R": 1e-10,
+      "tol_rel_du": 1e-8
+    },
+    "initial_condition": "sin(2*pi*x) * sin(2*pi*y)" 
+}
+  
